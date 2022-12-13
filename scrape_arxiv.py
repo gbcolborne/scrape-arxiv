@@ -3,7 +3,7 @@ from collections import defaultdict
 import arxiv
 
 DOC="""
-Get latest arXiv papers in one or more categories.
+Get latest arXiv papers in one or more categories. Write metadata and abstracts in a text file.
 
 """
 DATE_FORMAT = "%Y-%m-%d" # Date format

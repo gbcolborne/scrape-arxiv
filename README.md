@@ -1,6 +1,6 @@
 # scrape-arxiv
 
-Get latest arXiv papers in one or more categories, write metada and abstract.
+Get latest arXiv papers in one or more categories. Write metadata and abstracts in a text file.
 
 ## Requirements
 
