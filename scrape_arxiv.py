@@ -2,8 +2,8 @@ import os, argparse, datetime
 from collections import defaultdict
 import arxiv
 
-"""
-Get latest arXiv papers on NLP and related subjects.
+DOC="""
+Get latest arXiv papers in one or more categories.
 
 """
 DATE_FORMAT = "%Y-%m-%d" # Date format
@@ -121,11 +121,11 @@ def main(args):
     return
 
 if __name__ == "__main__":
-    p = argparse.ArgumentParser()
+    p = argparse.ArgumentParser(description=DOC)
     p.add_argument("path_output")
     p.add_argument("--categories", "-c", nargs="+", default=["cs.CL"],
                    help="space-separated arXiv categories to query (e.g. cs.CL, cs.IR, cs.LG)")
-    p.add_argument("--nb_days", "-n", type=int, default=7, help="Nb of days to go back to")
+    p.add_argument("--nb_days", "-n", type=int, default=7, help="Nb of past days to cover")
     p.add_argument("--include_updates", "-i", action="store_true",
                    help="Include papers papers that were updated (but not originally submitted) in this period")
     args = p.parse_args()
