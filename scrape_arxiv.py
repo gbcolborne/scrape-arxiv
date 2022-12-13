@@ -15,27 +15,27 @@ def format_result(r):
     Given a result from an arxiv search, format the result for printing.
 
     """
-    m = "# " + r.title
-    m += "\n- URL: " + r.entry_id
-    m += "\n- Published: " + r.published.strftime(DATE_FORMAT)
+    m = f"# {r.title}"
+    m += f"\n- URL: {r.entry_id}"
+    m += f"\n- Published: {r.published.strftime(DATE_FORMAT)}"
     if r.updated != r.published:
-        m += " (updated " + r.updated.strftime(DATE_FORMAT) + ")"
-    m += "\n- Authors: " + ", ".join(a.name for a in r.authors)
+        m += f" (updated {r.updated.strftime(DATE_FORMAT)})"
+    m += f"\n- Authors: {', '.join(a.name for a in r.authors)}"
     if r.comment:
-        m += "\n- Comments: " + r.comment
+        m += f"\n- Comments: {r.comment}"
     if r.journal_ref:
-        m += "\n- Journal: " + r.journal_ref
+        m += f"\n- Journal: {r.journal_ref}"
     if r.doi:
         # A URL for the resolved DOI to an external resource if present
-        m += "\n- DOI: " + r.doi
-    m += "\n- Primary category: " + r.primary_category
-    m += "\n- Categories: " + ", ".join(r.categories)
+        m += f"\n- DOI: {r.doi}"
+    m += f"\n- Primary category: {r.primary_category}"
+    m += f"\n- Categories: {', '.join(r.categories)}"
         
     # Up to three URLs associated with this result (including the abs and pdf pages)
     links = [link.href for link in r.links if link.title and link.title != "pdf"]
     if len(links):
-        m += "\n- Links: " + ", ".join(links)
-    m += "\n- Abstract: \"" + r.summary + "\""
+        m += f"\n- Links: {', '.join(links)}"
+    m += f'\n- Abstract: "{r.summary}"'
     return m
 
 def main(args):
