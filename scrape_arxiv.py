@@ -64,7 +64,7 @@ def main(args):
     print(f"\nINFO: getting papers from last {args.nb_days} days.")
     query = " OR ".join("cat:"+c for c in args.categories)
     max_results = min(MAX_PAPERS_PER_DAY * args.nb_days, MAX_RESULTS)
-    sort_by = arxiv.SortCriterion.LastUpdatedDate
+    sort_by = arxiv.SortCriterion.LastUpdatedDate if args.include_updates else arxiv.SortCriterion.SubmittedDate
     sort_order = arxiv.SortOrder.Descending
     search = arxiv.Search(
         query = query,
