@@ -45,6 +45,7 @@ def main(args):
     assert not os.path.exists(args.path_output)
 
     # Dummy search to get timezone info
+    client = arxiv.Client()
     search = arxiv.Search(
         query = "language",
         id_list = [],
@@ -52,7 +53,8 @@ def main(args):
         sort_by = arxiv.SortCriterion.SubmittedDate,
         sort_order = arxiv.SortOrder.Descending
     )
-    r = next(search.results())
+    results = client.results(search)
+    r = next(results)
     tzinfo = r.published.tzinfo
 
     # Get start date
@@ -73,12 +75,13 @@ def main(args):
         sort_by = sort_by,
         sort_order = sort_order
     )
-
+    results = client.results(search)
+    
     # Fitler results by date
     fr = []
     start_passed = False
     date_to_count = defaultdict(int)    
-    for r in search.results():
+    for r in results:
         d = r.updated if args.include_updates else r.published
         if d < start_date:
             start_passed = True
