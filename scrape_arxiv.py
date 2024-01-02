@@ -8,7 +8,7 @@ Get latest arXiv papers in one or more categories. Write metadata and abstracts 
 """
 DATE_FORMAT = "%Y-%m-%d" # Date format
 MAX_RESULTS = 300000 # API limit
-MAX_PAPERS_PER_DAY = 200 # Max number of results expected per day
+MAX_PAPERS_PER_DAY = 500 # Max number of results expected per day
 
 def format_result(r):
     """ 
@@ -48,10 +48,8 @@ def main(args):
     client = arxiv.Client()
     search = arxiv.Search(
         query = "language",
-        id_list = [],
         max_results = 1,
         sort_by = arxiv.SortCriterion.SubmittedDate,
-        sort_order = arxiv.SortOrder.Descending
     )
     results = client.results(search)
     r = next(results)
