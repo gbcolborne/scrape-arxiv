@@ -1,4 +1,4 @@
-import os, argparse, datetime
+import os, argparse, datetime, logging
 from collections import defaultdict
 import arxiv
 
@@ -8,7 +8,7 @@ Get latest arXiv papers in one or more categories. Write metadata and abstracts 
 """
 DATE_FORMAT = "%Y-%m-%d" # Date format
 MAX_RESULTS = 300000 # API limit
-MAX_PAPERS_PER_DAY = 500 # Max number of results expected per day
+MAX_PAPERS_PER_DAY = 1000 # Max number of results expected per day
 
 def format_result(r):
     """ 
@@ -45,7 +45,8 @@ def main(args):
     assert not os.path.exists(args.path_output)
 
     # Dummy search to get timezone info
-    client = arxiv.Client()
+    logging.basicConfig(level=logging.DEBUG)    
+    client = arxiv.Client(num_retries=50, page_size=2000, delay_seconds=3.1)
     search = arxiv.Search(
         query = "language",
         max_results = 1,
