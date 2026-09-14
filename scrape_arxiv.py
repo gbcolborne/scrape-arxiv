@@ -46,7 +46,7 @@ def main(args):
 
     # Dummy search to get timezone info
     logging.basicConfig(level=logging.DEBUG)    
-    client = arxiv.Client(num_retries=50, page_size=2000, delay_seconds=3.1)
+    client = arxiv.Client(num_retries=50, page_size=2000, delay_seconds=10)
     search = arxiv.Search(
         query = "language",
         max_results = 1,
@@ -76,7 +76,7 @@ def main(args):
     )
     results = client.results(search)
     
-    # Fitler results by date
+    # Filter results by date
     fr = []
     start_passed = False
     date_to_count = defaultdict(int)    
